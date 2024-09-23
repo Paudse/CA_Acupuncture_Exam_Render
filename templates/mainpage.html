@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>選擇題庫</title>
+        <style>
+        body {
+            text-align: left; /* 整體左對齊 */
+            margin: 20px; /* 外邊距 */
+        }
+
+        .radio-label {
+            font-size: 28px; /* 設定字體大小 */
+        }
+
+        .my-button {
+            width: 150px; /* 設定寬度 */
+            height: 50px; /* 設定高度 */
+            background-color: lightblue; /* 背景顏色 */
+            border: none; /* 取消邊框 */
+            border-radius: 5px; /* 圓角 */
+            font-size: 16px; /* 字體大小 */
+            cursor: pointer; /* 鼠標樣式 */
+        }
+
+        .button-container {
+            display: flex; /* 使用 Flexbox 使按鈕並列 */
+            align-items: center; /* 垂直居中對齊 */
+            margin-top: 20px; /* 外邊距 */
+        }
+
+        .button-container button {
+            width: 100px; /* 設定按鈕寬度 */
+            height: 40px; /* 設定按鈕高度 */
+            background-color: lightblue; /* 按鈕背景顏色 */
+            border: none; /* 取消邊框 */
+            border-radius: 5px; /* 圓角 */
+            font-size: 16px; /* 字體大小 */
+            cursor: pointer; /* 鼠標樣式 */
+            margin-right: 5px; /* 右側邊距 */
+        }
+
+        .button-container button:last-child {
+            margin-right: 1; /* 最後一個按鈕不需要右邊距 */
+        }
+
+        .button-container button:disabled {
+            background-color: lightgray; /* 禁用時的背景顏色 */
+            cursor: not-allowed; /* 禁用時的鼠標樣式 */
+        }
+    </style>
+</head>
+<body>
+    <h1>選擇題庫</h1>
+    <form action="/mainpage" method="post">
+        {% for test_area in test_areas %}
+<!--             <div>
+                <input type="checkbox" name="test_area">
+                <label>{{ test_area.file_name }}</label> -->
+
+                <label class="radio-label">
+                <input type="radio" name="test_area" value="{{ test_area.file_name }}" required>
+                {{ test_area.file_name }}
+            </label><br>
+            <!-- </div> -->
+        {% endfor %}
+        <br>
+        <button class="my-button" type="submit">提交</button>
+    </form>
+</body>
+</html>

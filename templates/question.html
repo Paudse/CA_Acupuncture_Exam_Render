@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <style>
+        body {
+            text-align: left; /* 整體左對齊 */
+            margin: 20px; /* 外邊距 */
+        }
+
+        .radio-label {
+            font-size: 28px; /* 設定字體大小 */
+        }
+
+        .my-button {
+            width: 150px; /* 設定寬度 */
+            height: 50px; /* 設定高度 */
+            background-color: lightblue; /* 背景顏色 */
+            border: none; /* 取消邊框 */
+            border-radius: 5px; /* 圓角 */
+            font-size: 16px; /* 字體大小 */
+            cursor: pointer; /* 鼠標樣式 */
+        }
+
+        .button-container {
+            display: flex; /* 使用 Flexbox 使按鈕並列 */
+            align-items: center; /* 垂直居中對齊 */
+            margin-top: 20px; /* 外邊距 */
+        }
+
+        .button-container button {
+            width: 100px; /* 設定按鈕寬度 */
+            height: 40px; /* 設定按鈕高度 */
+            background-color: lightblue; /* 按鈕背景顏色 */
+            border: none; /* 取消邊框 */
+            border-radius: 5px; /* 圓角 */
+            font-size: 16px; /* 字體大小 */
+            cursor: pointer; /* 鼠標樣式 */
+            margin-right: 5px; /* 右側邊距 */
+        }
+
+        .button-container button:last-child {
+            margin-right: 1; /* 最後一個按鈕不需要右邊距 */
+        }
+
+        .button-container button:disabled {
+            background-color: lightgray; /* 禁用時的背景顏色 */
+            cursor: not-allowed; /* 禁用時的鼠標樣式 */
+        }
+    </style>
+</head>
+<body>
+	<h2>[{{ selected_test_area }}] (第 {{ question_index }} 题 / 共 {{ total_questions }} 题)</h2>
+    <h1>{{ question.question }}</h1>
+    <form method="post" action="/question">
+        {% for option in question.options %}
+            <label class="radio-label">
+                <input type="radio" name="option" value="{{ option }}" required>
+                {{ option }}
+            </label><br>
+        {% endfor %}
+        <br>
+        <button class="my-button" type="submit">提交</button>
+    </form>
+
+    {% if session.get('is_answered') %}
+        <p style="color: {{ 'green' if session.get('correct_answer') else 'red' }}">答案是：{{ '正確' if session.get('correct_answer') else '錯誤' }}</p>
+        {% if not session.get('correct_answer') %}
+            <p>很遺憾，答案錯誤。請再試一次。</p>
+        {% endif %}
+    {% endif %}
+    
+    <div class="button-container">
+        <form method="post" action="/previous">
+            <button type="submit" {% if question_index == 0 %}disabled{% endif %}>上一題</button>
+        </form>
+        <form method="post" action="/next">
+            <button type="submit" {% if question_index == questions|length - 1 %}disabled{% endif %}>下一題</button>
+        </form>
+    </div>
+    <form method="post" action="/back_to_main">
+        <br>
+        <br>
+        <br>
+        <button class="my-button" type="submit">返回題庫選擇</button>
+    </form>
+</body>
+</html>

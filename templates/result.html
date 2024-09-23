@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>測驗結果</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .no-errors {
+            font-size: 1.5rem; /* 調整字體大小 */
+            color: green; /* 可選，調整顏色 */
+        }
+        .right-ans {
+            font-size: 1.5rem; /* 調整字體大小 */
+            color: green; /* 可選，調整顏色 */
+        }
+        .q-errors {
+            font-size: 1.5rem; /* 調整字體大小 */
+        }
+        .with-errors {
+            font-size: 1.5rem; /* 調整字體大小 */
+        }
+        .question-text {
+            font-size: 1.5rem; /* 調整問題字體大小 */
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>測驗結果</h1>
+        <h2>你的分數: {{ score }} / {{ total_questions }} ({{ total_score }}%)</h2>
+
+        <h3 class="q-errors">錯誤題目</h3>
+        {% if incorrect_questions %}
+            <ul class="list-group">
+                {% for question in incorrect_questions %}
+                    <li class="list-group-item">
+                        <strong class="with-errors">問題:</strong> <span class="question-text">{{ question.question }}</span><br>
+                        <strong class="with-errors">正確答案:</strong> <span class="right-ans">{{ question.correct_answer }}</span>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="no-errors">你沒有做錯題目！</p>
+        {% endif %}
+
+        <a href="{{ url_for('index') }}" class="btn btn-primary mt-4">重新開始測驗</a>
+    </div>
+</body>
+</html>
