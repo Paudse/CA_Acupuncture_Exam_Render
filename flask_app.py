@@ -7,7 +7,7 @@ app.secret_key = 'your_secret_key'
 
 # Define questions
 def import_question(file):
-    folder = "./講義/"
+    folder = "./Q&A/"
     # file = "Q&A-1 中醫基礎 p01"
     # file = "Q&A-1 中醫基礎 p02"
     # file = "Q&A-6 針灸 IIa p01"
