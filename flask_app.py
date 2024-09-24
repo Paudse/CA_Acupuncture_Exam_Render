@@ -90,6 +90,7 @@ def import_question(file):
 def scan_qa():
     folder = "./Q&A/"
     file_list = os.listdir(folder)
+    file_list = sorted(file_list)
     file_list = [item.replace('.txt', '') for item in file_list]
     test_areas = []
     for i in range (0, len(file_list)):
