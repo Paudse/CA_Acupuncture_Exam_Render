@@ -78,17 +78,27 @@ def import_question(file):
 #     }
 # ]
 
-test_areas = [
-    {"file_name": "Q&A-1 中醫基礎 p01"},
-    {"file_name": "Q&A-1 中醫基礎 p02"},
-    {"file_name": "Q&A-6 針灸 IIa p01"},
-    {"file_name": "Q&A-7 針灸 IIIa p06"},
-    {"file_name": "Q&A-9 方劑 p01"},
-    {"file_name": ""},
-]
+# test_areas = [
+#     {"file_name": "Q&A-1 中醫基礎 p01"},
+#     {"file_name": "Q&A-1 中醫基礎 p02"},
+#     {"file_name": "Q&A-6 針灸 IIa p01"},
+#     {"file_name": "Q&A-7 針灸 IIIa p06"},
+#     {"file_name": "Q&A-9 方劑 p01"},
+#     {"file_name": ""},
+# ]
+
+def scan_qa():
+    folder = "./Q&A/"
+    file_list = os.listdir(folder)
+    file_list = [item.replace('.txt', '') for item in file_list]
+    test_areas = []
+    for i in range (0, len(file_list)):
+        test_areas.append({"file_name": file_list[i]})
+    return test_areas
 
 @app.route('/')
 def index():
+    test_areas = scan_qa()
     session['current_question'] = 0
     session['score'] = 0
     session['answered_questions'] = []  # Keep track of answered questions
@@ -107,6 +117,7 @@ def mainpage():
 
 @app.route('/back_to_main', methods=['POST'])
 def back_to_main():
+    test_areas = scan_qa()
     session['questions'] = []
     session['current_question'] = 0
     session['score'] = 0
