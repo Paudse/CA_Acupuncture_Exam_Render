@@ -23,6 +23,15 @@
         .question-text {
             font-size: 1.5rem; /* 調整問題字體大小 */
         }
+        .my-button {
+            width: 150px; /* 設定寬度 */
+            height: 50px; /* 設定高度 */
+            background-color: lightblue; /* 背景顏色 */
+            border: none; /* 取消邊框 */
+            border-radius: 5px; /* 圓角 */
+            font-size: 16px; /* 字體大小 */
+            cursor: pointer; /* 鼠標樣式 */
+        }
     </style>
 </head>
 <body>
@@ -44,7 +53,13 @@
             <p class="no-errors">你沒有做錯題目！</p>
         {% endif %}
 
-        <a href="{{ url_for('index') }}" class="btn btn-primary mt-4">重新開始測驗</a>
+<!--         <a href="{{ url_for('index') }}" class="btn btn-primary mt-4">重新開始測驗</a> -->
+    <form method="post" action="/back_to_main">
+        <br>
+        <br>
+        <br>
+        <button class="my-button" type="submit">返回題庫選擇</button>
+    </form>
     </div>
 </body>
 </html>
