@@ -189,7 +189,7 @@ def result():
     total_questions = len(questions)
     total_score = round((score / total_questions) * 100, 2) if total_questions > 0 else 0
     incorrect_questions = session.get('incorrect_questions', [])
-    return render_template('result.html', score= score, total_questions = total_questions, total_score=total_score, total=100, incorrect_questions=incorrect_questions)  # Show out of 100
+    return render_template('result.html', selected_test_area=session['selected_test_area'], score= score, total_questions = total_questions, total_score=total_score, total=100, incorrect_questions=incorrect_questions)  # Show out of 100
 
 if __name__ == '__main__':
     # app.run(debug=True)
